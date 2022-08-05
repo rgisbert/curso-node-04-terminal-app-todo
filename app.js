@@ -1,9 +1,12 @@
-require('colors')
+require('colors');
 
-console.clear()
+const {pausa, showMenu} = require('./helpers/mensajes');
+
+console.clear();
 
 const main = async () => {
-  console.log('Hola mundo')
-}
+  showMenu();
+  // pausa();
+};
 
-main()
+main();
