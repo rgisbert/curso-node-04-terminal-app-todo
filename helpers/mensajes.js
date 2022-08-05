@@ -1,6 +1,6 @@
 require('colors');
 
-const showMenu = () => {
+const prepareMenu = () => {
   const title = '*  Seleccione una opción  *';
 
   console.clear();
@@ -16,33 +16,39 @@ const showMenu = () => {
   console.log(`${'5.'.green} Completar tarea(s)`);
   console.log(`${'6.'.green} Borrar tarea`);
   console.log(`${'0.'.green} Salir.\n`);
+};
 
-  // Recoge input usuario
-  const readLine = require('readline').createInterface({
-    // Pausar ejecución hasta recibir datos
-    input: process.stdin,
-    output: process.stdout,
-  });
+const showMenu = () => {
+  // Dibujado del menú
+  prepareMenu();
 
-  readLine.question(`Seleccione una opción: `, (answer) => {
-    console.log(answer);
-    readLine.close(); // Para no seguir esperando información
+  return new Promise((resolve) => {
+    // Recoge input usuario
+    const readLine = require('readline').createInterface({
+      // Pausar ejecución hasta recibir datos
+      input: process.stdin,
+      output: process.stdout,
+    });
+
+    readLine.question(`Seleccione una opción: `, (answer) => {
+      readLine.close(); // Para no seguir esperando información
+      resolve(answer);
+    });
   });
 };
 
 const pausa = () => {
-  const readLine = require('readline').createInterface({
-    // Pausar ejecución hasta recibir datos
-    input: process.stdin,
-    output: process.stdout,
-  });
+  return new Promise((resolve) => {
+    const readLine = require('readline').createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    });
 
-  readLine.question(
-    `\nPresione ${'ENTER'.green} para continuar.\n`,
-    (answer) => {
+    readLine.question(`\nPresione ${'ENTER'.green} para continuar.\n`, () => {
       readLine.close();
-    }
-  );
+      resolve();
+    });
+  });
 };
 
 module.exports = {
