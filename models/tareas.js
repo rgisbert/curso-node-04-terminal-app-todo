@@ -24,6 +24,14 @@ class Tareas {
   }
 
   /**
+   * Eliminar una tarea del listado
+   * @param {string} id Identificador del objeto a borrar
+   */
+  borrarTarea(id) {
+    if (this.#listado[id]) delete this.#listado[id];
+  }
+
+  /**
    * Recarag el listado de tareas con las recuperadas y crea la estructura
    * @param {tarea[]} tareas Tareas a cargar en la instancia
    */

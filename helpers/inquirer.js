@@ -25,11 +25,11 @@ const questions = [
       },
       {
         value: '5',
-        name: `${'5.'.green} Completar tarea(s)`,
+        name: `${'5.'.green} Completar tarea(s).`,
       },
       {
         value: '6',
-        name: `${'6.'.green} Borrar tarea`,
+        name: `${'6.'.green} Borrar tarea.`,
       },
       {
         value: '0',
@@ -96,4 +96,52 @@ const leerInput = async (message = 'Introduzca un valor:') => {
   return descripcionTarea;
 };
 
-export {inquirerMenu, leerInput, pausa};
+/**
+ * Recibir todas las tareas y, tras elegir en menú la deseada, devolver ese id
+ * @param {Tarea[]} tareas Array con toda la información de las tareas
+ * @returns {string} Id de la tarea a borrar
+ */
+const listadoTareasBorrar = async (tareas = []) => {
+  const choices = tareas.map(({id, desc}, i) => {
+    const idx = `${i + 1}.`.green;
+
+    return {
+      value: id,
+      name: `${idx} ${desc}.`,
+    };
+  });
+
+  // Añadir la opción de cancelar
+  choices.push({value: '0', name: `${'0'.green}. Cancelar borrado.`});
+
+  const questions = [
+    {
+      type: 'list',
+      name: 'id',
+      message: 'Borrar:',
+      choices,
+    },
+  ];
+
+  const {id} = await inquirer.prompt(questions);
+  return id;
+};
+
+/**
+ * Mostrar mensaje para preguntar al usuario y esperar su respuesta
+ * @param {string} message Mensaje a mostrar
+ * @returns {boolean} Respuesta del usuario
+ */
+const confirmar = async (message = '¿Desea continuar?') => {
+  const {ok} = await inquirer.prompt([
+    {
+      type: 'confirm',
+      name: 'ok',
+      message,
+    },
+  ]);
+
+  return ok;
+};
+
+export {confirmar, inquirerMenu, leerInput, listadoTareasBorrar, pausa};

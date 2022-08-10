@@ -1,6 +1,12 @@
 import Tareas from './models/tareas.js';
 import {guardarDB, leerDB} from './helpers/guardarArchivo.js';
-import {inquirerMenu, leerInput, pausa} from './helpers/inquirer.js';
+import {
+  confirmar,
+  inquirerMenu,
+  leerInput,
+  listadoTareasBorrar,
+  pausa,
+} from './helpers/inquirer.js';
 
 console.clear();
 
@@ -39,6 +45,20 @@ const main = async () => {
         break;
 
       case '6': // Borrar tarea
+        const id = await listadoTareasBorrar(tareas.listadoArr);
+
+        // Si elige la opción de Borrar no hace nada
+        if (id !== '0') {
+          const okBorrar = await confirmar(
+            `¿Está seguro de borrar este elemento?`.red
+          );
+
+          if (okBorrar) {
+            tareas.borrarTarea(id);
+            console.log(`Tarea eliminada.`.green);
+          }
+        }
+
         break;
     }
 
