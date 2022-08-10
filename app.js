@@ -1,4 +1,5 @@
 import Tareas from './models/tareas.js';
+import {guardarDB} from './helpers/guardarArchivo.js';
 import {inquirerMenu, leerInput, pausa} from './helpers/inquirer.js';
 
 console.clear();
@@ -36,6 +37,8 @@ const main = async () => {
       case '6': // Borrar tarea
         break;
     }
+
+    // guardarDB(tareas.listadoCompleto);
 
     if (opt !== '0') await pausa();
   } while (opt !== '0');

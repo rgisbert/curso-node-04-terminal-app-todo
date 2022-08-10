@@ -8,6 +8,13 @@ class Tareas {
   }
 
   /**
+   * Devuelve el objeto sin modificaciones para guardarlo en archivo
+   */
+  get listadoCompleto() {
+    return this.#listado;
+  }
+
+  /**
    * Devuelve todas las tareas para la impresión
    */
   get listadoArr() {
