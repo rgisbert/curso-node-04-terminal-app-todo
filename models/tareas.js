@@ -98,6 +98,23 @@ class Tareas {
 
     console.log(`${index}. ${tarea} (${completado}).`);
   }
+
+  toggleCompleted(ids = []) {
+    ids.forEach((id) => {
+      const tarea = this.#listado[id];
+
+      if (!tarea.completadoEn) {
+        tarea.completadoEn = new Date().toISOString();
+      }
+    });
+
+    // Las que no vengan marcadas, quitarlas
+    this.listadoArr.forEach(({id}) => {
+      if (!ids.includes(id)) {
+        this.#listado[id].completadoEn = null;
+      }
+    });
+  }
 }
 
 export default Tareas;

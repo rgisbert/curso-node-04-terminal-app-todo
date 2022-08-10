@@ -5,6 +5,7 @@ import {
   inquirerMenu,
   leerInput,
   listadoTareasBorrar,
+  mostrarListadoChecklist,
   pausa,
 } from './helpers/inquirer.js';
 
@@ -42,6 +43,8 @@ const main = async () => {
         break;
 
       case '5': // Completar tarea(s)
+        const arrIds = await mostrarListadoChecklist(tareas.listadoArr);
+        tareas.toggleCompleted(arrIds);
         break;
 
       case '6': // Borrar tarea

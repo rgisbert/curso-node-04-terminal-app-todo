@@ -144,4 +144,40 @@ const confirmar = async (message = '¿Desea continuar?') => {
   return ok;
 };
 
-export {confirmar, inquirerMenu, leerInput, listadoTareasBorrar, pausa};
+/**
+ * Seleccionar los ids que se desean actualizar.
+ * @param {Tarea[]} tareas
+ * @returns {id[]} id's de las opciones seleccionadas
+ */
+const mostrarListadoChecklist = async (tareas = []) => {
+  const choices = tareas.map(({id, desc, completadoEn}, i) => {
+    const idx = `${i + 1}.`.green;
+
+    return {
+      value: id,
+      name: `${idx} ${desc}.`,
+      checked: completadoEn ? true : false,
+    };
+  });
+
+  const questions = [
+    {
+      type: 'checkbox',
+      name: 'ids',
+      message: 'Selecciones:',
+      choices,
+    },
+  ];
+
+  const {ids} = await inquirer.prompt(questions);
+  return ids;
+};
+
+export {
+  confirmar,
+  inquirerMenu,
+  leerInput,
+  listadoTareasBorrar,
+  mostrarListadoChecklist,
+  pausa,
+};
