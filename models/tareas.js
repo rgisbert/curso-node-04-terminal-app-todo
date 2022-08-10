@@ -1,5 +1,9 @@
 import Tarea from './tarea.js';
+import {leerDB} from '../helpers/guardarArchivo.js';
 
+/**
+ * Clase para manejar todo lo relativo al listado de Tareas
+ */
 class Tareas {
   #listado = {};
 
@@ -8,10 +12,13 @@ class Tareas {
   }
 
   /**
-   * Devuelve el objeto sin modificaciones para guardarlo en archivo
+   * Recarag el listado de tareas con las recuperadas y crea la estructura
+   * @param {tarea[]} tareas Tareas a cargar en la instancia
    */
-  get listadoCompleto() {
-    return this.#listado;
+  cargarTareasFromArray(tareas = []) {
+    tareas.forEach((t) => {
+      this.#listado[t.id] = t;
+    });
   }
 
   /**

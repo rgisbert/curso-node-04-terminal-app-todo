@@ -1,7 +1,1 @@
-{
-  "bbb16d63-bbc6-4b9a-90c7-4c20298a7068": {
-    "id": "bbb16d63-bbc6-4b9a-90c7-4c20298a7068",
-    "desc": "Recoger las 7 bolas del dragón",
-    "completadoEn": null
-  }
-}
+[{"id":"54dd9dae-b0f2-4e19-80ee-40728da354dd","desc":"Buscar las 7 bolas mágicas de Shenron.","completadoEn":null},{"id":"dd60e1d1-dcaa-48a7-9c26-0d950a058d31","desc":"Guardar la bola de 4 estrellas del abuelo Gohan.","completadoEn":null},{"id":"2419d9be-f470-4c0d-a8f8-6184010d8627","desc":"Ayudar a Bulma a encontrar las otras 6 bolas","completadoEn":null}]

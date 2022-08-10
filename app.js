@@ -1,12 +1,16 @@
 import Tareas from './models/tareas.js';
-import {guardarDB} from './helpers/guardarArchivo.js';
+import {guardarDB, leerDB} from './helpers/guardarArchivo.js';
 import {inquirerMenu, leerInput, pausa} from './helpers/inquirer.js';
 
 console.clear();
 
 const main = async () => {
   const tareas = new Tareas();
+  const tareasDB = leerDB();
   let opt = '';
+
+  // Si se recuperan tareas del archivo, se cargan en la instancia
+  if (tareasDB) tareas.cargarTareasFromArray(tareasDB);
 
   do {
     opt = await inquirerMenu();
@@ -20,7 +24,6 @@ const main = async () => {
         break;
 
       case '2': // Listar tareas
-        // console.log(tareas.listarTareas());
         const res = tareas.listadoArr;
         console.log(res);
         break;
@@ -38,7 +41,7 @@ const main = async () => {
         break;
     }
 
-    // guardarDB(tareas.listadoCompleto);
+    guardarDB(tareas.listadoArr);
 
     if (opt !== '0') await pausa();
   } while (opt !== '0');
