@@ -39,20 +39,25 @@ const questions = [
   },
 ];
 
+/**
+ * Muestra las opciones de menú a realizar por el programa
+ * @returns {string} opciones del programa
+ */
 const inquirerMenu = async () => {
   console.clear();
 
-  const title = '*  Seleccione una opción  *';
-
-  console.log('*'.repeat(title.length).green);
-  console.log(title.green);
-  console.log('*'.repeat(title.length).green + '\n');
+  console.log('*************************'.green);
+  console.log(`${'*'.green} ${'Seleccione una opción'.white} ${'*'.green}`);
+  console.log('*************************\n'.green);
 
   const {opcion} = await inquirer.prompt(questions);
 
   return opcion;
 };
 
+/**
+ * Pausa antes de continuar con la ejecución
+ */
 const pausa = () => {
   // Si lo pongo dentro de inquirer imprime un ? en la línea vacía
   console.log('\n');
@@ -66,4 +71,30 @@ const pausa = () => {
   ]);
 };
 
-export {inquirerMenu, pausa};
+/**
+ * Función en la que, mandado un mensaje personalizado, se recoja lo escrito en pantalla por el usuario
+ * @param {string} message Mensaje en pantalla para pedir un valor personalizado
+ * @returns El input de respuesta introducido por el usuario
+ */
+const leerInput = async (message = 'Introduzca un valor:') => {
+  console.log(`\n`);
+
+  const question = [
+    {
+      type: 'input',
+      name: 'descripcionTarea',
+      message,
+      validate(value) {
+        if (value.length === 0) return `Por favor, introduzca un valor.`;
+
+        return true;
+      },
+    },
+  ];
+
+  const {descripcionTarea} = await inquirer.prompt(question);
+
+  return descripcionTarea;
+};
+
+export {inquirerMenu, leerInput, pausa};
