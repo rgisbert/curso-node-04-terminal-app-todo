@@ -47,22 +47,48 @@ class Tareas {
    * Imprime un listado bonito para el usuario
    */
   listadoCompleto() {
-    /**
-     * Según la condición evaluada, devuelve un texto para mostrar al usuario
-     * @param {null | string} valor En caso de que sea null, está por realizar
-     * @returns texto "Completado" (en verde) o "Pendiente" (en rojo)
-     */
-    const completado = (valor) =>
-      valor ? 'Completado'.green : 'Pendiente'.red;
-
     // ? Si imprimo con '\n' deja dos espacios
     console.log();
 
     Object.entries(this.#listado).forEach(([, {desc, completadoEn}], index) => {
-      const i = `${index + 1}`.green;
-
-      console.log(`${i}. ${desc} (${completado(completadoEn)}).`);
+      this.#imprimirTarea({
+        num: index + 1,
+        tarea: desc,
+        finalizada: completadoEn,
+      });
     });
+  }
+
+  listarCompletadasPendientes(completadas = true) {
+    let i = 0;
+
+    console.log();
+
+    this.listadoArr.forEach(({desc, completadoEn}) => {
+      if (completadas === !!completadoEn) {
+        i++;
+
+        this.#imprimirTarea({
+          num: i,
+          tarea: desc,
+          finalizada: completadoEn,
+        });
+      }
+    });
+  }
+
+  /**
+   * Impresión de la tarea en pantalla
+   * @property {object} param0  - Objeto con opciones a imprimir
+   * @property {number} param0.num    - Número de lista ordenada
+   * @property {string} param0.tarea  - Descripción de la tarea
+   * @property {null | string} param0.finalizada  - Recibe el parámetro de la tarea, si es null, sigue pendiente
+   */
+  #imprimirTarea({num = 0, tarea = '', finalizada = false}) {
+    const index = `${num}`.green;
+    const completado = finalizada ? `${finalizada}`.green : 'Pendiente'.red;
+
+    console.log(`${index}. ${tarea} (${completado}).`);
   }
 }
 

@@ -28,9 +28,11 @@ const main = async () => {
         break;
 
       case '3': // Listar tareas completadas
+        tareas.listarCompletadasPendientes();
         break;
 
       case '4': // Listar tareas pendientes
+        tareas.listarCompletadasPendientes(false);
         break;
 
       case '5': // Completar tarea(s)
