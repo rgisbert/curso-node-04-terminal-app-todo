@@ -59,8 +59,7 @@ const inquirerMenu = async () => {
  * Pausa antes de continuar con la ejecución
  */
 const pausa = () => {
-  // Si lo pongo dentro de inquirer imprime un ? en la línea vacía
-  console.log('\n');
+  console.log();
 
   return inquirer.prompt([
     {
